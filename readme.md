@@ -100,8 +100,7 @@ weather-monitoring-system/
 ├── requirements.txt       # Python dependencies
 ├── README.md              # Project documentation
 ├── .env                   # Environment variables (created manually)
-└── test/
-    └── test_app.py        # Unit tests
+
 ```
 
 ---
