@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Central Wrapper -->
+    <div class="wrapper">
+        <h1>Weather Dashboard</h1>
+        <h3>Created by Karan Jadhav</h3>
+
+        <!-- Weather Data Table -->
+        <div class="table-container">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>City</th>
+                        <th>Temperature (°C)</th>
+                        <th>Feels Like (°C)</th>
+                        <th>Main</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody id="weather-data-table">
+                    {% for city, info in data.items() %}
+                    <tr>
+                        <td>{{ city }}</td>
+                        <td>{{ info['temp'] }}</td>
+                        <td>{{ info['feels_like'] }}</td>
+                        <td>{{ info['main'] }}</td>
+                        <td>{{ info['dt'] | timestamp_to_datetime }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Set Alert Form -->
+        <h2>Set Temperature Alert</h2>
+        <div class="form-container">
+            <form id="alert-form">
+                <div class="form-group">
+                    <label for="city">City:</label>
+                    <select class="form-control" id="city" name="city">
+                        <option value="Delhi">Delhi</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Bangalore">Bangalore</option>
+                        <option value="Kolkata">Kolkata</option>
+                        <option value="Hyderabad">Hyderabad</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="threshold">Temperature Threshold (°C):</label>
+                    <input class="form-control" type="number" id="threshold" name="threshold" step="0.1" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Set Alert</button>
+            </form>
+        </div>
+
+        <!-- Alert Messages -->
+        <div class="alerts" id="alerts"></div>
+
+        <!-- Plotly Plot -->
+        <div id="plot"></div>
+    </div>
+
+    <script type="text/javascript">
+        function updateWeatherData() {
+            $.ajax({
+                url: '/weather-data',
+                type: 'GET',
+                success: function(response) {
+                    // Update the weather data table
+                    var tableBody = '';
+                    $.each(response.weather_data, function(city, info) {
+                        tableBody += '<tr>';
+                        tableBody += '<td>' + city + '</td>';
+                        tableBody += '<td>' + info.temp + '</td>';
+                        tableBody += '<td>' + info.feels_like + '</td>';
+                        tableBody += '<td>' + info.main + '</td>';
+                        tableBody += '<td>' + new Date(info.dt * 1000).toISOString() + '</td>';
+                        tableBody += '</tr>';
+                    });
+                    $('#weather-data-table').html(tableBody);
+
+                    // Update the Plotly plot
+                    var plotData = JSON.parse(response.plot_data);
+                    Plotly.newPlot('plot', plotData.data, plotData.layout);
+
+                    // Display alerts
+                    var alertsDiv = $('#alerts');
+                    alertsDiv.empty();
+                    if (response.alerts_triggered.length > 0) {
+                        response.alerts_triggered.forEach(function(alert) {
+                            alertsDiv.append('<div class="custom-alert">' + alert + '</div>');
+                        });
+                    }
+                },
+                error: function(error) {
+                    console.log('Error fetching weather data:', error);
+                }
+            });
+        }
+
+        // Handle alert form submission
+        $('#alert-form').on('submit', function(e) {
+            e.preventDefault();
+
+            var city = $('#city').val();
+            var threshold = $('#threshold').val();
+
+            $.ajax({
+                url: '/set-alert',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ city: city, threshold: parseFloat(threshold) }),
+                success: function(response) {
+                    alert(response.message);
+                },
+                error: function(error) {
+                    console.log('Error setting alert:', error);
+                }
+            });
+        });
+
+        // Initial call to fetch weather data when the page loads
+        updateWeatherData();
+
+        // Set up an interval to refresh the data every 5 seconds
+        setInterval(updateWeatherData, 5000);
+    </script>
+
+</body>
+
+</html>

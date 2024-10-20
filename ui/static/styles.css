@@ -1,0 +1,116 @@
+/* General Page Layout */
+body {
+    background: linear-gradient(to right, #2c3e50, #bdc3c7);
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+}
+
+/* Central Wrapper */
+.wrapper {
+    max-width: 1100px;
+    width: 200%;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    text-align: center;
+}
+
+h1, h2 {
+    color: #2980b9;
+    margin-bottom: 20px;
+}
+
+/* Weather Data Table */
+.table-container {
+    margin: 20px 0;
+}
+
+table {
+    width: 100%;
+    background-color: #ecf0f1;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+thead th {
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+}
+
+tbody td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Form Styles */
+.form-container {
+    background: #f7f9fb;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #2980b9;
+}
+
+select, input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    color: #333;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #2980b9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #1e70a6;
+}
+
+/* Alerts Section */
+.alerts {
+    margin-bottom: 20px;
+}
+
+.custom-alert {
+    padding: 10px;
+    background-color: #e74c3c;
+    color: white;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* Plot Section */
+#plot {
+    width: 100%;
+    margin-bottom: 20px;
+}
