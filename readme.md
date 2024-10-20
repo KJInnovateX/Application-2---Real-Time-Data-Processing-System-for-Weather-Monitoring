@@ -1,8 +1,8 @@
-Here’s a well-structured and detailed `README.md` file for your project:
-
 ---
 
 # Weather Monitoring System
+### By : Karan Jadhav
+Live DEMO - https://application-2-real-time-data-processing.onrender.com/
 
 This is a Flask-based weather monitoring web application that uses the OpenWeatherMap API to display real-time weather data for multiple cities. It features live weather updates, interactive temperature trend charts, and an alert system for setting temperature thresholds by the user.
 
@@ -72,10 +72,10 @@ You will need an API key from [OpenWeatherMap](https://home.openweathermap.org/u
 
 ### 6. Start the Application
 
-Use the `start.py` script to run the application.
+Use the `main.py` script to run the application.
 
 ```bash
-python start.py
+python ui/main.py
 ```
 
 The application will be accessible at `http://localhost:5000` or the IP you configured in the `.env` file.
@@ -92,13 +92,15 @@ weather-monitoring-system/
 │   ├── ui/
 │   │   ├── templates/     # HTML files
 │   │   ├── static/        # CSS and JS files
-│   │   └── main.py        # Flask app routes
+│   │   └── main.py        # Flask app routes # Entry point
 │
-├── config.py              # Configuration settings
-├── start.py               # Entry point for deployment
+├── config.py              # Configuration settings       
 ├── requirements.txt       # Python dependencies
 ├── README.md              # Project documentation
 ├── .env                   # Environment variables (created manually)
+├── test/
+│   ├── test_api.py   # Your test file
+│   
 
 ```
 
@@ -132,7 +134,7 @@ weather-monitoring-system/
 pip install gunicorn
 
 # Run the application
-gunicorn -w 4 -b 0.0.0.0:5000 start:app
+gunicorn -w 4 -b 0.0.0.0:5000 ui/main:app
 ```
 
 ### Nginx Configuration (Optional)
@@ -173,6 +175,7 @@ python -m unittest discover -s test
 - Plotly
 - Gunicorn (for production deployment)
 - dotenv
+- python-dotenv
 
 For detailed dependencies, see [requirements.txt](./requirements.txt).
 
