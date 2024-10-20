@@ -17,7 +17,7 @@ This is a Flask-based weather monitoring web application that uses the OpenWeath
 
 ## Demo
 
-![Weather Monitoring Dashboard](your_image_link_here)
+![Weather Monitoring Dashboard](./demo.png)
 
 ---
 
