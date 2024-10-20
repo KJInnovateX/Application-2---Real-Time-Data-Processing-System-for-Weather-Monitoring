@@ -26,8 +26,7 @@ This is a Flask-based weather monitoring web application that uses the OpenWeath
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/weather-monitoring-system.git
-cd weather-monitoring-system
+git clone https://github.com/KJInnovateX/Application-2---Real-Time-Data-Processing-System-for-Weather-Monitoring.git
 ```
 
 ### 2. Create and activate a virtual environment
