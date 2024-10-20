@@ -4,5 +4,3 @@ requests
 jinja2
 gunicorn
 python-dotenv
-os
-sys
