@@ -4,6 +4,9 @@
 ### By : Karan Jadhav
 Live DEMO - https://application-2-real-time-data-processing.onrender.com/
 
+Overview
+The Weather Monitoring Application is a Flask-based web app that provides real-time weather data for multiple cities in India. Utilizing the OpenWeatherMap API, the application fetches current weather conditions, displays temperature trends through interactive plots using Plotly, and allows users to set temperature alerts for their chosen cities.
+
 This is a Flask-based weather monitoring web application that uses the OpenWeatherMap API to display real-time weather data for multiple cities. It features live weather updates, interactive temperature trend charts, and an alert system for setting temperature thresholds by the user.
 
 ## Features
